@@ -3,10 +3,9 @@ from collections import deque
 
 def produce_elements(dq, n):
     for i in range(n):
-        if len(dq) < dq.maxlen:
-            dq.append(i)
-        else:
-            print('Queue full...')
+        dq.append(i)
+        print(f'Added {i}')
+        if len(dq) == dq.maxlen:
             yield
 
 
@@ -20,7 +19,7 @@ def consume_elements(dq):
 
 def coordinator():
     dq = deque(maxlen=10)
-    producer = produce_elements(dq, 30)
+    producer = produce_elements(dq, 36)
     consumer = consume_elements(dq)
 
     while True:
@@ -32,3 +31,5 @@ def coordinator():
             next(consumer)
 
 
+if __name__ == '__main__':
+    coordinator()
